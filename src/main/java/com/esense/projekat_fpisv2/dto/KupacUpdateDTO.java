@@ -2,14 +2,14 @@ package com.esense.projekat_fpisv2.dto;
 
 import com.esense.projekat_fpisv2.entity.Adresa;
 import com.esense.projekat_fpisv2.entity.Zaposleni;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class KupacResponseDTO {
+@Getter
+@Setter
+public class KupacUpdateDTO {
 
     private long pib;
 
@@ -21,8 +21,12 @@ public class KupacResponseDTO {
 
     private String potpis;
 
-    private Adresa adresa;
+    private long postanski_broj;
 
-    private Zaposleni zaposleni;
+    private String sifra_ulice;
+
+    private long adresa_ID;
+
+    private String jmbg;
 
 }
