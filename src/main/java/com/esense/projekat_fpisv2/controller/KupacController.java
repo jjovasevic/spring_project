@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin("http://localhost:4200/")
 @RestController
 // @RequestMapping("/")
 public class KupacController {
@@ -35,7 +36,7 @@ public class KupacController {
     }
 
 
-    @GetMapping("/kupac/{pib}")
+    @GetMapping("/kupac/id/{pib}")
     public Kupac vratiKupca(@PathVariable Long pib) throws Exception {
         Optional<Kupac> kupacOptional = kupacService.getById(pib);
 
@@ -46,7 +47,7 @@ public class KupacController {
         }
     }
 
-    @GetMapping("/kupci/{naziv}")
+    @GetMapping("/kupac/{naziv}")
     public List<Kupac> vratiKupce(@PathVariable String naziv){
         return kupacService.getByName(naziv);
     }

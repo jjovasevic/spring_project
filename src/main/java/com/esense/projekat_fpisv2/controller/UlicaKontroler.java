@@ -3,13 +3,12 @@ package com.esense.projekat_fpisv2.controller;
 import com.esense.projekat_fpisv2.entity.Ulica;
 import com.esense.projekat_fpisv2.service.UlicaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 // @RequestMapping("")
+@CrossOrigin("http://localhost:4200/")
 @RestController
 public class UlicaKontroler {
 
@@ -23,5 +22,11 @@ public class UlicaKontroler {
     @GetMapping("ulica")
     public List<Ulica> vratiUlice(){
         return ulicaService.getAll();
+    }
+
+
+    @GetMapping("ulica/{postanskiBroj}")
+    public List<Ulica> vratiUlicePoPostanskomBroju(@PathVariable Long postanskiBroj){
+        return ulicaService.getByPostalCode(postanskiBroj);
     }
 }

@@ -2,6 +2,8 @@ package com.esense.projekat_fpisv2.service;
 
 import com.esense.projekat_fpisv2.entity.Adresa;
 import com.esense.projekat_fpisv2.entity.AdresaIDembeddable;
+import com.esense.projekat_fpisv2.entity.Ulica;
+import com.esense.projekat_fpisv2.entity.UlicaIDembeddable;
 import com.esense.projekat_fpisv2.repository.AdresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,16 @@ public class AdresaService {
     @Transactional
     public Optional<Adresa> getById(AdresaIDembeddable id){
         return adresaRepository.findById(id);
-//        return adresaRepository.getAdressById(id.getAdresa_ID(),id.getSifra_ulice(),id.getPostanski_broj());
     }
+
+    @Transactional
+    public List<Adresa> getByForeignKey(Long grad, String ulica) {
+        return adresaRepository.findAll(grad,ulica);
+    }
+
+//    @Transactional
+//    public List<Adresa> getByForeignKey(UlicaIDembeddable spoljniKljuc) {
+//        return adresaRepository.findAll(spoljniKljuc.getPostanski_broj(),spoljniKljuc.getSifra_ulice());
+//    }
 
 }

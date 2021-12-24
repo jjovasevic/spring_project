@@ -9,6 +9,8 @@ import lombok.*;
 @Setter
 public class KupacInsertDTO {
 
+    // private long pib;
+
     private String naziv_kupca;
 
     private String email_kupca;

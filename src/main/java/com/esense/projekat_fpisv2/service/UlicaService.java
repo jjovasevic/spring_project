@@ -29,4 +29,9 @@ public class UlicaService {
     public Ulica getById(UlicaIDembeddable sifra){
         return ulicaRepository.getById(sifra);
     }
+
+    @Transactional
+    public List<Ulica> getByPostalCode(Long postanskiBroj){
+        return ulicaRepository.findAll(postanskiBroj);
+    }
 }

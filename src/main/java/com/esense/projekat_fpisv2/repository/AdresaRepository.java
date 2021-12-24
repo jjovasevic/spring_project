@@ -11,4 +11,7 @@ import java.util.List;
 @Repository
 public interface AdresaRepository extends JpaRepository<Adresa, AdresaIDembeddable> {
 
+    @Query("SELECT a FROM adresa a WHERE a.id.postanski_broj=?1 AND a.id.sifra_ulice=?2")
+    public List<Adresa> findAll(Long postanski_broj,String sifra_ulice);
+
 }
