@@ -56,7 +56,6 @@ public class KupacController {
     public Kupac dodajKupca(@RequestBody KupacInsertDTO kupacInsert) throws Exception {
 
         Zaposleni zaposleni = zaposleniService.getById(kupacInsert.getJmbg());
-        System.out.println(zaposleni);
 
         AdresaIDembeddable id_adrese = new AdresaIDembeddable();
         id_adrese.setAdresa_ID(kupacInsert.getAdresa_ID());
@@ -97,6 +96,8 @@ public class KupacController {
 
         if(optionalAdresa.isPresent()) {
             Adresa adresa = optionalAdresa.get();
+
+
 
             Kupac kupac = new Kupac(kupacUpdate.getPib(),kupacUpdate.getNaziv_kupca(),
                                     kupacUpdate.getEmail_kupca(), kupacUpdate.getTelefon_kupca(),

@@ -33,7 +33,7 @@ public class Kupac {
 
     @NonNull
     @Column(name = "potpis")
-    private String potpis_kupca;
+    private String potpis;
 
     @NonNull
     @ManyToOne
