@@ -22,7 +22,7 @@ public class StavkaFakture {
 
     @NonNull
     @Column(name = "EAN")
-    private String EAN;
+    private String ean;
 
     @NonNull
     @Column(name = "kolicina")
@@ -30,10 +30,9 @@ public class StavkaFakture {
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "sifra_proizvoda", referencedColumnName = "sifra_proizvoda",insertable = false, updatable = false)
+    @JoinColumn(name = "sifra_proizvoda", referencedColumnName = "sifra_proizvoda")
     private Proizvod proizvod;
 
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "sifra_fakture", referencedColumnName = "sifra_fakture",insertable = false, updatable = false)
     private Faktura faktura;

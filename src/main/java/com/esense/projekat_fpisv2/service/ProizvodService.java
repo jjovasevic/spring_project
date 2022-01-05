@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProizvodService{
@@ -22,4 +23,16 @@ public class ProizvodService{
     public List<Proizvod> getAll(){
         return proizvodRepository.findAll();
     }
+
+    @Transactional
+    public Proizvod getOne(Long id) throws Exception {
+        Optional<Proizvod> optionalProizvod = proizvodRepository.findById(id);
+
+        if(optionalProizvod.isPresent()){
+            return optionalProizvod.get();
+        }else{
+            throw new Exception("Trazeni proizvod ne postoji.");
+        }
+    }
+
 }

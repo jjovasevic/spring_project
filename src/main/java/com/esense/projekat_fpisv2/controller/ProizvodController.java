@@ -3,10 +3,7 @@ package com.esense.projekat_fpisv2.controller;
 import com.esense.projekat_fpisv2.entity.Proizvod;
 import com.esense.projekat_fpisv2.service.ProizvodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +23,16 @@ public class ProizvodController {
     public List<Proizvod> vratiSveProizvode(){
         return proizvodService.getAll();
     }
+
+    @GetMapping("/{id}")
+    public Proizvod vratiProizvod(@PathVariable Long id){
+        try {
+            return proizvodService.getOne(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+
 }

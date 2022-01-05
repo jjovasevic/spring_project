@@ -19,6 +19,7 @@ public class Faktura {
 
     @Id
     @Column(name = "sifra_fakture")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sifraFakture;
 
     @NonNull
@@ -31,17 +32,17 @@ public class Faktura {
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "npID", referencedColumnName = "npID",insertable = false, updatable = false)
+    @JoinColumn(name = "npID", referencedColumnName = "npID")
     private NacinPlacanja nacinPlacanja;
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "niID", referencedColumnName = "niID",insertable = false, updatable = false)
+    @JoinColumn(name = "niID", referencedColumnName = "niID")
     private NacinIsporuke nacinIsporuke;
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "jmbg", referencedColumnName = "jmbg",insertable = false, updatable = false)
+    @JoinColumn(name = "jmbg", referencedColumnName = "jmbg")
     private Zaposleni zaposleni;
 
     @NonNull
