@@ -16,7 +16,7 @@ public class Adresa {
     @EmbeddedId
     private AdresaIDembeddable id;
 
-    @ManyToOne // (cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumns({
             //name predstavlja naziv kolone u tabeli adresa, a referencedColumnName predstavlja kolonu u tabeli ulica
             @JoinColumn(name = "postanski_broj",referencedColumnName = "postanski_broj",insertable = false, updatable = false),

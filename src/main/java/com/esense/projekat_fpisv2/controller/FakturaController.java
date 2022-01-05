@@ -1,7 +1,7 @@
 package com.esense.projekat_fpisv2.controller;
 
-import com.esense.projekat_fpisv2.entity.Grad;
-import com.esense.projekat_fpisv2.service.GradService;
+import com.esense.projekat_fpisv2.entity.Faktura;
+import com.esense.projekat_fpisv2.service.FakturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,21 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
-// @RequestMapping("")
+@RequestMapping("faktura")
 @CrossOrigin("http://localhost:4200/")
 @RestController
-public class GradController {
+public class FakturaController {
 
-    private GradService gradService;
+    private FakturaService fakturaService;
 
     @Autowired
-    public GradController(GradService gradService) {
-        this.gradService = gradService;
+    public FakturaController(FakturaService fakturaService) {
+        this.fakturaService = fakturaService;
     }
 
-    @GetMapping("/grad")
-    public List<Grad> vratiGradove(){
-        return gradService.getAll();
+    @GetMapping
+    public List<Faktura> vratiSveFakture(){
+        return fakturaService.getAll();
     }
 }
