@@ -28,7 +28,7 @@ public class FakturaController {
     }
 
     @PostMapping
-    public String dodajFakturu(@RequestBody InsertObject insertObject) throws Exception {
+    public Faktura dodajFakturu(@RequestBody InsertObject insertObject) throws Exception {
         return fakturaService.save(insertObject);
     }
 }

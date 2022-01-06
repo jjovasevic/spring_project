@@ -22,7 +22,7 @@ public class NacinIsporuke {
 
     @NonNull
     @Column(name = "nacin_isporuke")
-    private String nazivIsporuke;
+    private String nacinIsporuke;
 
 
 }

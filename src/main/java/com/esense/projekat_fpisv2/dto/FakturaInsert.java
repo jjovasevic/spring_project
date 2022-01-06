@@ -13,7 +13,7 @@ import java.util.Date;
 @Setter
 public class FakturaInsert {
 
-    // private long sifraFakture;
+    private long sifraFakture;
 
     private Date datumPrometa;
     private String valuta;

@@ -14,6 +14,5 @@ import java.util.List;
 public class InsertObject {
 
     private FakturaInsert fakturaInsert;
-    private List<StavkaFaktureInsert> stavkeFaktureInsert;
-
+    private List<StavkaFaktureInsert> stavkaFaktureInsert;
 }

@@ -32,7 +32,7 @@ public class FakturaService {
     public List<Faktura> getAll(){ return fakturaRepository.findAll(); }
 
     @Transactional
-    public String save(InsertObject insertObject) throws Exception {
+    public Faktura save(InsertObject insertObject) throws Exception {
 
         NacinPlacanja np = nacinPlacanjaService.getOne(insertObject.getFakturaInsert().getNpID());
 
@@ -55,7 +55,7 @@ public class FakturaService {
         long idFakture = faktura.getSifraFakture();
         System.out.println("ID nove fakture je: " + idFakture);
 
-        List<StavkaFaktureInsert> stavkeFaktIns = insertObject.getStavkeFaktureInsert();
+        List<StavkaFaktureInsert> stavkeFaktIns = insertObject.getStavkaFaktureInsert();
 
         for(int i = 0; i < stavkeFaktIns.size(); i++){
 
@@ -69,6 +69,6 @@ public class FakturaService {
             faktura.dodajStavkuFakture(sf);
         }
 
-        return "Uspesno uneta faktura u bazu podataka!";
+        return faktura;
     }
 }
