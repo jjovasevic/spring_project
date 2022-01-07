@@ -20,4 +20,7 @@ public class StavkaFaktureService {
 
     @Transactional
     public List<StavkaFakture> getAll(){ return stavkaFaktureRepository.findAll(); }
+
+    @Transactional
+    public List<StavkaFakture> getAllByIdSifre(Long id){ return stavkaFaktureRepository.findBySifraFakture(id); }
 }

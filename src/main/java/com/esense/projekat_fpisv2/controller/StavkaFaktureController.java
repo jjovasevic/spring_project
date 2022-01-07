@@ -3,10 +3,7 @@ package com.esense.projekat_fpisv2.controller;
 import com.esense.projekat_fpisv2.entity.StavkaFakture;
 import com.esense.projekat_fpisv2.service.StavkaFaktureService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,4 +21,9 @@ public class StavkaFaktureController {
 
     @GetMapping
     public List<StavkaFakture> vratiSveStavke(){ return stavkaFaktureService.getAll(); }
+
+    @GetMapping("/{sifraFakture}")
+    public List<StavkaFakture> vratiStavkePoSifri(@PathVariable Long sifraFakture){
+        return stavkaFaktureService.getAllByIdSifre(sifraFakture);
+    }
 }

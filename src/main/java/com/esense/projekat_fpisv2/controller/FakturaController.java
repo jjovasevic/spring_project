@@ -32,6 +32,11 @@ public class FakturaController {
         return fakturaService.findAllByValuta(valuta);
     }
 
+    @GetMapping("/id/{sifraFakture}")
+    public Faktura vratiFakturu(@PathVariable Long sifraFakture){
+        return fakturaService.findById(sifraFakture);
+    }
+
     @DeleteMapping("/{sifraFakture}")
     public String obrisiFakturu(@PathVariable String sifraFakture){
         return fakturaService.deleteById(Long.valueOf(sifraFakture.trim())); }

@@ -35,6 +35,16 @@ public class FakturaService {
     public List<Faktura> findAllByValuta(String valuta){ return fakturaRepository.findAllByValuta(valuta); }
 
     @Transactional
+    public Faktura findById(Long id){
+        Optional<Faktura> optionalFaktura = fakturaRepository.findById(id);
+        if(optionalFaktura.isPresent()){
+            return optionalFaktura.get();
+        }else{
+            return null;
+        }
+    }
+
+    @Transactional
     public String deleteById(Long id){
         fakturaRepository.deleteById(id);
         return "Faktura je uspesno obrisana.";
