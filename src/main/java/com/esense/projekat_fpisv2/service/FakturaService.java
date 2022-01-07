@@ -32,6 +32,15 @@ public class FakturaService {
     public List<Faktura> getAll(){ return fakturaRepository.findAll(); }
 
     @Transactional
+    public List<Faktura> findAllByValuta(String valuta){ return fakturaRepository.findAllByValuta(valuta); }
+
+    @Transactional
+    public String deleteById(Long id){
+        fakturaRepository.deleteById(id);
+        return "Faktura je uspesno obrisana.";
+    }
+
+    @Transactional
     public Faktura save(InsertObject insertObject) throws Exception {
 
         NacinPlacanja np = nacinPlacanjaService.getOne(insertObject.getFakturaInsert().getNpID());
@@ -71,4 +80,6 @@ public class FakturaService {
 
         return faktura;
     }
+
+
 }

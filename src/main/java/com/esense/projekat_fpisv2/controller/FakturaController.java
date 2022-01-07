@@ -27,8 +27,21 @@ public class FakturaController {
         return fakturaService.getAll();
     }
 
+    @GetMapping("/{valuta}")
+    public List<Faktura> vratiFakturePoValuti(@PathVariable String valuta){
+        return fakturaService.findAllByValuta(valuta);
+    }
+
+    @DeleteMapping("/{sifraFakture}")
+    public String obrisiFakturu(@PathVariable String sifraFakture){
+        return fakturaService.deleteById(Long.valueOf(sifraFakture.trim())); }
+
     @PostMapping
     public Faktura dodajFakturu(@RequestBody InsertObject insertObject) throws Exception {
         return fakturaService.save(insertObject);
     }
+
+
+
+
 }
