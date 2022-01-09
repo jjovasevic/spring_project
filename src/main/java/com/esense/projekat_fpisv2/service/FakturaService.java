@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,5 +92,45 @@ public class FakturaService {
         return faktura;
     }
 
+    // pokusaj za update
+    @Transactional
+    public Faktura update(InsertObject insertObject) throws Exception {
+
+        NacinPlacanja np = nacinPlacanjaService.getOne(insertObject.getFakturaInsert().getNpID());
+
+        NacinIsporuke ni = nacinIsporukeService.getOne(insertObject.getFakturaInsert().getNiID());
+
+        Zaposleni zaposleni = zaposleniService.getById(insertObject.getFakturaInsert().getJmbg());
+
+        AdresaIDembeddable id_adrese = new AdresaIDembeddable();
+        id_adrese.setAdresa_ID(insertObject.getFakturaInsert().getAdresaID());
+        id_adrese.setSifra_ulice(insertObject.getFakturaInsert().getSifraUlice());
+        id_adrese.setPostanski_broj(insertObject.getFakturaInsert().getPostanskiBroj());
+        Adresa adresa = new Adresa();
+        adresa.setId(id_adrese);
+
+        List<StavkaFaktureInsert> stavkeFaktIns = insertObject.getStavkaFaktureInsert();
+        List<StavkaFakture> stavkeFakture = new ArrayList<>();
+
+        for(int i = 0; i < stavkeFaktIns.size(); i++){
+
+            Proizvod p = proizvodService.getOne(stavkeFaktIns.get(i).getSifraProizvoda());
+
+            StavkaFakture sf = new StavkaFakture(stavkeFaktIns.get(i).getOpis(),stavkeFaktIns.get(i).getEan(),stavkeFaktIns.get(i).getKolicina(),p);
+            sf.setId(new StavkaFaktureIDembeddable(stavkeFaktIns.get(i).getSifraStavke(),insertObject.getFakturaInsert().getSifraFakture()));
+
+            stavkeFakture.add(sf);
+        }
+
+        Faktura faktura = new Faktura(insertObject.getFakturaInsert().getSifraFakture(),
+                insertObject.getFakturaInsert().getDatumPrometa(),insertObject.getFakturaInsert().getValuta(),
+                np,ni,zaposleni,adresa,stavkeFakture);
+
+        fakturaRepository.save(faktura);
+
+        System.out.println("Uspesno izmenjena faktura.");
+
+        return faktura;
+    }
 
 }

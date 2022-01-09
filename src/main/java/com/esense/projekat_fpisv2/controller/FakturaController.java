@@ -46,6 +46,10 @@ public class FakturaController {
         return fakturaService.save(insertObject);
     }
 
+    @PutMapping
+    public Faktura izmeniFakturu(@RequestBody InsertObject insertObject) throws Exception {
+        return fakturaService.update(insertObject);
+    }
 
 
 

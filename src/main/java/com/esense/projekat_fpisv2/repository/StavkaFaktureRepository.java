@@ -14,5 +14,7 @@ public interface StavkaFaktureRepository extends JpaRepository<StavkaFakture, St
 
     @Query("SELECT sf FROM stavkafakture sf WHERE sf.id.sifraFakture = ?1")
     public List<StavkaFakture> findBySifraFakture(Long sifraFakture);
-
+//
+//    @Query("DELETE FROM stavkafakture sf WHERE sf.id.sifraStavke = ?1 AND sf.id.sifraFakture = ?2")
+//    public String deleteById(Long idStavke, Long idFakture);
 }

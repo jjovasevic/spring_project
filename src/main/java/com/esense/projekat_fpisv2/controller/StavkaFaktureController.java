@@ -26,4 +26,9 @@ public class StavkaFaktureController {
     public List<StavkaFakture> vratiStavkePoSifri(@PathVariable Long sifraFakture){
         return stavkaFaktureService.getAllByIdSifre(sifraFakture);
     }
+
+//    @DeleteMapping("/{idStavke}/{idFakture}")
+//    public String obrisiStavku(@PathVariable Long idStavke, @PathVariable Long idFakture){
+//        return stavkaFaktureService.deleteOne(idStavke,idFakture);
+//    }
 }
