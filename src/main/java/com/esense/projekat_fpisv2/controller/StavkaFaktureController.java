@@ -27,8 +27,9 @@ public class StavkaFaktureController {
         return stavkaFaktureService.getAllByIdSifre(sifraFakture);
     }
 
-//    @DeleteMapping("/{idStavke}/{idFakture}")
-//    public String obrisiStavku(@PathVariable Long idStavke, @PathVariable Long idFakture){
-//        return stavkaFaktureService.deleteOne(idStavke,idFakture);
-//    }
+    @DeleteMapping("/{idStavke}/{idFakture}")
+    public String obrisiStavku(@PathVariable Long idStavke, @PathVariable Long idFakture){
+        stavkaFaktureService.deleteOne(idStavke,idFakture);
+        return "Obrisana stavka fakture.";
+    }
 }

@@ -2,10 +2,12 @@ package com.esense.projekat_fpisv2.service;
 
 import com.esense.projekat_fpisv2.entity.Kupac;
 import com.esense.projekat_fpisv2.repository.KupacRepository;
+import org.hibernate.exception.GenericJDBCException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +47,16 @@ public class KupacService{
     }
 
     @Transactional
-    public void deleteById(Long pib){
-        kupacRepository.deleteById(pib);
+    public String deleteById(Long pib) {
+        List<Kupac> postojeciKupci = kupacRepository.findAll();
+        for(int i = 0; i < postojeciKupci.size(); i++){
+            if(pib == postojeciKupci.get(i).getPib()){
+                kupacRepository.deleteById(pib);
+                return "Uspesno obrisan kupac iz baze.";
+            }
+        }
+        //return null;
+        return "Kupac nije obrisan jer ne postoji u bazi.";
     }
+
 }

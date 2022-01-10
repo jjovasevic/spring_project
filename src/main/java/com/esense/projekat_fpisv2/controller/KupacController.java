@@ -4,9 +4,11 @@ import com.esense.projekat_fpisv2.dto.KupacInsertDTO;
 import com.esense.projekat_fpisv2.dto.KupacUpdateDTO;
 import com.esense.projekat_fpisv2.entity.*;
 import com.esense.projekat_fpisv2.service.*;
+import org.hibernate.exception.GenericJDBCException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,13 +39,13 @@ public class KupacController {
 
 
     @GetMapping("/kupac/id/{pib}")
-    public Kupac vratiKupca(@PathVariable Long pib) throws Exception {
+    public Kupac vratiKupca(@PathVariable Long pib) {
         Optional<Kupac> kupacOptional = kupacService.getById(pib);
 
         if(kupacOptional.isPresent()){
             return kupacOptional.get();
         }else{
-            throw new Exception("Kupac sa pibom: "+pib+" ne postoji.");
+            return null;
         }
     }
 
@@ -78,8 +80,7 @@ public class KupacController {
 
     @DeleteMapping("/kupac/{pib}")
     public String obrisiKupca(@PathVariable Long pib){
-        kupacService.deleteById(pib);
-        return "Kupac je uspesno obrisan. PIB kupca koji je obrisan: "+pib;
+        return kupacService.deleteById(pib);
     }
 
     @PutMapping("/kupac")

@@ -47,8 +47,14 @@ public class FakturaService {
 
     @Transactional
     public String deleteById(Long id){
-        fakturaRepository.deleteById(id);
-        return "Faktura je uspesno obrisana.";
+        List<Faktura> postojeceFakture = fakturaRepository.findAll();
+        for(int f = 0; f < postojeceFakture.size(); f++){
+            if(postojeceFakture.get(f).getSifraFakture() == id){
+                fakturaRepository.deleteById(id);
+                return "Faktura je uspesno obrisana.";
+            }
+        }
+        return "Faktura nije obrisana jer ne postoji u bazi.";
     }
 
     @Transactional
@@ -92,7 +98,6 @@ public class FakturaService {
         return faktura;
     }
 
-    // pokusaj za update
     @Transactional
     public Faktura update(InsertObject insertObject) throws Exception {
 

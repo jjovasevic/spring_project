@@ -14,8 +14,6 @@ public interface FakturaRepository extends JpaRepository<Faktura,Long> {
     @Query("SELECT f FROM faktura f WHERE f.valuta LIKE %?1%")
     public List<Faktura> findAllByValuta(String valuta);
 
-    // getAllByValuta
-
 
 
 }

@@ -4,6 +4,7 @@ import com.esense.projekat_fpisv2.entity.Kupac;
 import com.esense.projekat_fpisv2.entity.StavkaFakture;
 import com.esense.projekat_fpisv2.entity.StavkaFaktureIDembeddable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,8 @@ public interface StavkaFaktureRepository extends JpaRepository<StavkaFakture, St
 
     @Query("SELECT sf FROM stavkafakture sf WHERE sf.id.sifraFakture = ?1")
     public List<StavkaFakture> findBySifraFakture(Long sifraFakture);
-//
-//    @Query("DELETE FROM stavkafakture sf WHERE sf.id.sifraStavke = ?1 AND sf.id.sifraFakture = ?2")
-//    public String deleteById(Long idStavke, Long idFakture);
+
+    @Modifying
+    @Query("DELETE FROM stavkafakture sf WHERE sf.id.sifraStavke = ?1 AND sf.id.sifraFakture = ?2")
+    public void deleteById(Long idStavke, Long idFakture);
 }
