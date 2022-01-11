@@ -55,7 +55,6 @@ public class KupacService{
                 return "Uspesno obrisan kupac iz baze.";
             }
         }
-        //return null;
         return "Kupac nije obrisan jer ne postoji u bazi.";
     }
 

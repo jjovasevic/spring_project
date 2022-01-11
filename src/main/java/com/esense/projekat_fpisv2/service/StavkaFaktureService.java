@@ -23,7 +23,14 @@ public class StavkaFaktureService {
     public List<StavkaFakture> getAll(){ return stavkaFaktureRepository.findAll(); }
 
     @Transactional
-    public List<StavkaFakture> getAllByIdSifre(Long id){ return stavkaFaktureRepository.findBySifraFakture(id); }
+    public List<StavkaFakture> getAllByIdSifre(Long id){
+        List<StavkaFakture> stavke = stavkaFaktureRepository.findBySifraFakture(id);
+        if(stavke != null){
+            return stavke;
+        }else{
+            return null;
+        }
+    }
 
     @Transactional
     public void deleteOne(Long idStavke, Long idFakture){ stavkaFaktureRepository.deleteById(idStavke,idFakture); }

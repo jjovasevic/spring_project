@@ -41,7 +41,6 @@ public class KupacController {
     @GetMapping("/kupac/id/{pib}")
     public Kupac vratiKupca(@PathVariable Long pib) {
         Optional<Kupac> kupacOptional = kupacService.getById(pib);
-
         if(kupacOptional.isPresent()){
             return kupacOptional.get();
         }else{
