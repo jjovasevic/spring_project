@@ -18,18 +18,10 @@ import java.util.Optional;
 public class KupacController {
 
     private KupacService kupacService;
-    private GradService gradService;
-    private UlicaService ulicaService;
-    private AdresaService adresaService;
-    private ZaposleniService zaposleniService;
 
     @Autowired
-    public KupacController(KupacService kupacService, GradService gradService, UlicaService ulicaService, AdresaService adresaService, ZaposleniService zaposleniService) {
+    public KupacController(KupacService kupacService) {
         this.kupacService = kupacService;
-        this.gradService = gradService;
-        this.ulicaService = ulicaService;
-        this.adresaService = adresaService;
-        this.zaposleniService = zaposleniService;
     }
 
     @GetMapping("/kupac")
@@ -40,12 +32,7 @@ public class KupacController {
 
     @GetMapping("/kupac/id/{pib}")
     public Kupac vratiKupca(@PathVariable Long pib) {
-        Optional<Kupac> kupacOptional = kupacService.getById(pib);
-        if(kupacOptional.isPresent()){
-            return kupacOptional.get();
-        }else{
-            return null;
-        }
+        return kupacService.getById(pib);
     }
 
     @GetMapping("/kupac/{naziv}")
@@ -54,27 +41,13 @@ public class KupacController {
     }
 
     @PostMapping("/kupac")
-    public Kupac dodajKupca(@RequestBody KupacInsertDTO kupacInsert) throws Exception {
-
-        Zaposleni zaposleni = zaposleniService.getById(kupacInsert.getJmbg());
-
-        AdresaIDembeddable id_adrese = new AdresaIDembeddable();
-        id_adrese.setAdresa_ID(kupacInsert.getAdresa_ID());
-        id_adrese.setSifra_ulice(kupacInsert.getSifra_ulice());
-        id_adrese.setPostanski_broj(kupacInsert.getPostanski_broj());
-
-        Optional<Adresa> optionalAdresa = adresaService.getById(id_adrese);
-
-        if(optionalAdresa.isPresent()) {
-            Adresa adresa = optionalAdresa.get();
-
-            Kupac kupac = new Kupac(kupacInsert.getNaziv_kupca(),
-                    kupacInsert.getEmail_kupca(), kupacInsert.getTelefon_kupca(), kupacInsert.getPotpis(), adresa, zaposleni);
-
-            return kupacService.insert(kupac);
-        }else{
-            throw new Exception("Adresa ne postoji.");
+    public Kupac dodajKupca(@RequestBody KupacInsertDTO kupacInsert) {
+        try {
+            return kupacService.insert(kupacInsert);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @DeleteMapping("/kupac/{pib}")
@@ -83,30 +56,13 @@ public class KupacController {
     }
 
     @PutMapping("/kupac")
-    public Kupac promeniKupca(@RequestBody KupacUpdateDTO kupacUpdate) throws Exception {
-
-        Zaposleni zaposleni = zaposleniService.getById(kupacUpdate.getJmbg());
-
-        AdresaIDembeddable id_adrese = new AdresaIDembeddable();
-        id_adrese.setAdresa_ID(kupacUpdate.getAdresa_ID());
-        id_adrese.setSifra_ulice(kupacUpdate.getSifra_ulice());
-        id_adrese.setPostanski_broj(kupacUpdate.getPostanski_broj());
-
-        Optional<Adresa> optionalAdresa = adresaService.getById(id_adrese);
-
-        if(optionalAdresa.isPresent()) {
-            Adresa adresa = optionalAdresa.get();
-
-
-
-            Kupac kupac = new Kupac(kupacUpdate.getPib(),kupacUpdate.getNaziv_kupca(),
-                                    kupacUpdate.getEmail_kupca(), kupacUpdate.getTelefon_kupca(),
-                                    kupacUpdate.getPotpis(), adresa, zaposleni);
-
-            return kupacService.update(kupac);
-        }else{
-            throw new Exception("Adresa ne postoji.");
+    public Kupac promeniKupca(@RequestBody KupacUpdateDTO kupacUpdate){
+        try {
+            return kupacService.update(kupacUpdate);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
 }

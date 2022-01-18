@@ -27,7 +27,6 @@ public class ZaposleniService {
 
     @Transactional
     public Zaposleni getById(String jmbg){
-        //changed from getById to findById
         return zaposleniRepository.findById(jmbg).get();
     }
 }

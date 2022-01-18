@@ -27,11 +27,6 @@ public class AdresaKontroler {
         return adresaService.getAll();
     }
 
-//    @GetMapping("adresa/{spoljniKljuc}")
-//    public List<Adresa> vratiAdresePoSpoljnomKljucu(@PathVariable UlicaIDembeddable spoljniKljuc){
-//        return adresaService.getByForeignKey(spoljniKljuc);
-//    }
-
     @GetMapping("adresa/{grad}/{ulica}")
     public List<Adresa> vratiAdresePoSpoljnomKljucu(@PathVariable("grad") Long grad, @PathVariable("ulica") String ulica){
         return adresaService.getByForeignKey(grad,ulica);

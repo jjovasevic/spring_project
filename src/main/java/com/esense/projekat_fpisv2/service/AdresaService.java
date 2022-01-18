@@ -37,9 +37,6 @@ public class AdresaService {
         return adresaRepository.findAll(grad,ulica);
     }
 
-//    @Transactional
-//    public List<Adresa> getByForeignKey(UlicaIDembeddable spoljniKljuc) {
-//        return adresaRepository.findAll(spoljniKljuc.getPostanski_broj(),spoljniKljuc.getSifra_ulice());
-//    }
+
 
 }
